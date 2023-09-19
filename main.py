@@ -15,7 +15,7 @@ options = webdriver.ChromeOptions()  # Chrome WebDriver API
 options.add_experimental_option("detach", True)  # detach chrome from program after open
 options.add_experimental_option('excludeSwitches', ['enable-logging'])
 caps = options.to_capabilities()
-caps["acceptInsecureCerts"] = True  # proceed to unsafe
+caps["acceptInsecureCerts"] = True  # proceed to unsafe if safety alert popped up
 
 
 def AutoBMC(BMC_IP, USERNAME, USER, PWD):
@@ -44,7 +44,7 @@ if __name__ == '__main__':
     while True:
         df = pd.read_excel(r'C:\Users\afiq0\PycharmProjects\AutoBMC\autobmc.xlsx')  # read excel file contains hostname
         print(df.iloc[1:, 0])
-        print('\nChoose Hostname\n      or\nPress enter to exit..')
+        print('\nChoose Hostname\n      or\nPress enter to exit..')  # Show name to select, usually each servers has its own hostname
         userInput = int(input())
 
         if not userInput:

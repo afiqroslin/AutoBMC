@@ -4,6 +4,7 @@ I created this project a while ago when I was working as Firmware Validation Eng
 
 However, I made a little modification in this repo because I don't have access to the servers anymore and this repo is only to showcase the project I've worked on previously.
 I changed the IP address of the servers into twitter so we can see how the script demonstrate automatic login to twitter.
+By making few adjustments, this script can be use to automate login into any websites.
 
 
 ## Prerequisite

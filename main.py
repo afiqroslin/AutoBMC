@@ -12,7 +12,7 @@ import time
 
 path = r"C:\Users\afiq0\PycharmProjects\AutoBMC\chromedriver_win32\chromedriver.exe"  # path to chromedriver program
 options = webdriver.ChromeOptions()  # Chrome WebDriver API
-options.add_experimental_option("detach", True)  # detach chrome from program after open
+options.add_experimental_option("detach", True)  # detach chrome from program after open, to keep it running after script finished execution
 options.add_experimental_option('excludeSwitches', ['enable-logging'])
 caps = options.to_capabilities()
 caps["acceptInsecureCerts"] = True  # proceed to unsafe if safety alert popped up
@@ -24,20 +24,17 @@ def AutoBMC(BMC_IP, USERNAME, USER, PWD):
 
     print("Redirecting...")
     driver = webdriver.Chrome(options=options)
-    driver.get("http://" + BMC_IP) #Get server IP address/domain name
+    driver.get("https://" + BMC_IP) #Get server IP address/domain name
 
-    # Insert username and click next
+    # Insert username
     wait = WebDriverWait(driver, 20)
-    wait.until(EC.element_to_be_clickable((By.XPATH, "//input[@autocomplete='username']"))).send_keys(USERNAME)
-    wait.until(EC.element_to_be_clickable((By.XPATH, "//div[@role='button'][contains(.,'Next')]"))).click()
-
-    # Twitter will detect automation as suspicious activity, so need to bypass by providing the info needed
-    wait.until(EC.element_to_be_clickable((By.XPATH, "//input[@autocomplete='on']"))).send_keys(USER)
-    wait.until(EC.element_to_be_clickable((By.XPATH, "//div[@role='button'][contains(.,'Next')]"))).click()
+    wait.until(EC.element_to_be_clickable((By.XPATH, "/html/body/div[1]/div/div/div[2]/div/div/div[1]/div[1]/div/section/main/article/div[2]/div[1]/div[2]/div/form/div[1]/div[1]/div/label/input"))).send_keys(USERNAME)
 
     # Insert password fill and click login
-    wait.until(EC.element_to_be_clickable((By.XPATH, "//input[@autocomplete='current-password']"))).send_keys(PWD)
-    wait.until(EC.element_to_be_clickable((By.XPATH, "//div[@role='button'][contains(.,'Log in')]"))).click()
+    wait.until(EC.element_to_be_clickable((By.XPATH, "/html/body/div[1]/div/div/div[2]/div/div/div[1]/div[1]/div/section/main/article/div[2]/div[1]/div[2]/div/form/div[1]/div[2]/div/label/input"))).send_keys(PWD)
+
+    #Click login
+    wait.until(EC.element_to_be_clickable((By.XPATH, "/html/body/div[1]/div/div/div[2]/div/div/div[1]/div[1]/div/section/main/article/div[2]/div[1]/div[2]/div/form/div[1]/div[3]/button"))).click()
 
 
 if __name__ == '__main__':
